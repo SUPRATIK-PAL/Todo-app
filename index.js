@@ -1,5 +1,8 @@
 const inputBox = document.getElementById("input-box");
 const list = document.getElementById("list-container");
+const numOfLists = document.getElementById("count");
+
+let count = 0;
 
 function clickHandler(){
     if(inputBox.value === ""){
@@ -11,6 +14,9 @@ function clickHandler(){
         let span = document.createElement("span")
         span.innerHTML = "\u00d7"
         li.appendChild(span)
+        count++;
+        numOfLists.innerText = count + " tasks left";
+        console.log(count);
         showSuccessToast();
     }
     inputBox.value = "";
@@ -52,6 +58,12 @@ list.addEventListener('click', (e) => {
     }
     if(e.target.tagName === "SPAN"){
         e.target.parentElement.remove();
+        if(count === 0){
+            count = 0;
+        }else{
+            count--;
+        }
+        numOfLists.innerText = count + " tasks left";
         saveData();
         removeTodoToast();
     }
@@ -59,10 +71,12 @@ list.addEventListener('click', (e) => {
 
 function saveData(){
     localStorage.setItem("data", list.innerHTML);
+    localStorage.setItem("data2", numOfLists.innerText);
 }
 
 function showData(){
     list.innerHTML = localStorage.getItem("data");
+    numOfLists.innerText = localStorage.getItem("data2")
 }
 
 showData();

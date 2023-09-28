@@ -37,6 +37,14 @@ box-sizing: border-box;
     margin-left: 10px;
 }
 
+.head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.head p{
+    color: rgb(220, 44, 44);
+}
 .row{
     display: flex;
     align-items: center;
